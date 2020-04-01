@@ -1,0 +1,15 @@
+version: '3'
+services:
+  shui_oauth:
+    image: golang:latest
+    container_name: shui_oauth
+    expose:
+    - "80"
+    environment:
+    - VIRTUAL_HOST=sjs.ngrok.hanwide.com
+    - GOPROXY=http://mirrors.aliyun.com/goproxy/
+    - GO111MODOLE=on
+    volumes:
+      - ./:/go/src/shuiOauth
+    command: go run /go/src/shuiOauth/main.go
+    network_mode: docker_network
