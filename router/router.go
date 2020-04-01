@@ -2,6 +2,7 @@ package router
 
 import (
 	controller "shuiOauth/Controller"
+	"shuiOauth/config"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -13,7 +14,7 @@ func NewRouter() *gin.Engine {
 	// 全局中间件
 	// Logger 中间件将日志写入 gin.DefaultWriter，即使你将 GIN_MODE 设置为 release。
 	// By default gin.DefaultWriter = os.Stdout
-	r.Use(gin.Logger())
+	router.Use(gin.Logger())
 	// 初始化基于redis的存储引擎
 	// 参数说明：
 	//    第1个参数 - redis最大的空闲连接数
@@ -22,7 +23,7 @@ func NewRouter() *gin.Engine {
 	//    第4个参数 - redis密码
 	//    第5个参数 - session加密密钥
 	store, _ := config.InitRedis()
-	r.Use(sessions.Sessions("mysession", store))
+	router.Use(sessions.Sessions("mysession", store))
 	// 测试
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{

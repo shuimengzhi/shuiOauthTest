@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"net/http"
+
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
@@ -28,7 +30,7 @@ func SetSession(c *gin.Context) {
 		session.Set("response_type", responseType)
 		session.Set("state", state)
 		session.Save()
-
+		c.Redirect(http.StatusMovedPermanently, "/login")
 	}
 
 }
