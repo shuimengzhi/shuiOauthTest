@@ -1,8 +1,13 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 // Login 登录验证
 func Login(c *gin.Context) {
-	c.JSON(200, gin.H{"msg": "this is login"})
+	// 这里应该跳转到登录页面然后登录完成后返回openid到GetCode路由
+	c.Redirect(http.StatusMovedPermanently, "/GetCode?openid=122")
 }
