@@ -24,6 +24,8 @@ func NewRouter() *gin.Engine {
 	//    第5个参数 - session加密密钥
 	store, _ := config.InitRedis()
 	router.Use(sessions.Sessions("mysession", store))
+	// mysql连接
+	config.InitMysql()
 	// 测试
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{

@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-contrib/sessions/redis"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
 )
 
@@ -14,6 +15,8 @@ var DB *gorm.DB
 
 // InitMysql 连接mysql
 func InitMysql() {
+	// 从本地读取环境变量
+	godotenv.Load("/go/src/shuiOauth/.env")
 	db, err := gorm.Open("mysql", os.Getenv("MYSQL_HOST"))
 	if err != nil {
 		panic("连接数据库失败, error=" + err.Error())
